@@ -8,8 +8,8 @@ from checkout.webhook_handler import StripeWH_Handler
 import stripe
 
 
-@require_POST  # will ensure get requests are rejected
-@csrf_exempt  # stripe wont send a csrf token as usually needed
+@require_POST
+@csrf_exempt
 def webhook(request):
     """Listen for webhooks from Stripe"""
     # Setup
@@ -39,7 +39,7 @@ def webhook(request):
 
     # Map webhook events to relevant handler functions
     event_map = {
-        'payment_intent.succeeded': handler.handle_payment_intent_succeeded,  # methods are whats in the handler
+        'payment_intent.succeeded': handler.handle_payment_intent_succeeded,
         'payment_intent.payment_failed': handler.handle_payment_intent_payment_failed,
     }
 
